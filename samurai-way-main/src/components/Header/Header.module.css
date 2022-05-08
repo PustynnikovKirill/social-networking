@@ -1,9 +1,14 @@
 .header{
     /*даем псевдоним h,n и c и потом используем его выше, говоря сколько нужно столбцов и строк  */
     grid-area: h;
-    background-color: #096969;
+    background-color: #165b5b;
+    display: flex;
+    align-items: center;
 }
 /*говорим, если в header лежит img, то сделай ее ширину 40px*/
 .header img {
-    width:40px;
+    height: 50px;
+    width: 50px;
+    border-radius: 80px;
+
 }
