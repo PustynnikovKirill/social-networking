@@ -1,10 +1,11 @@
 import React from 'react';
 import style from './MyPosts.module.css'
+import {Post} from "./Posts/Post";
 
 
 export const MyPosts = () => {
     return (
-        <div >
+        <div>
             <div>
                 My posts
                 <div>
@@ -12,12 +13,11 @@ export const MyPosts = () => {
                     <button>Add post</button>
                 </div>
             </div>
-            <div className={style.item}>
-                <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaNUr6_D1h11lM3KnJ_CgXxwoGF7mU7fIvxA&usqp=CAU'} />
-                post 1
-            </div>
-            <div>
-                post 2
+            <div className={style.post}>
+                <Post/>
+                <Post/>
+                <Post/>
+                <Post/>
             </div>
         </div>
     )
