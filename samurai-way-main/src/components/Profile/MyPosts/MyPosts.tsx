@@ -7,17 +7,15 @@ export const MyPosts = () => {
     return (
         <div>
             <div>
- ё               My posts
+                My posts
                 <div>
                     <textarea></textarea>
                     <button>Add post</button>
                 </div>
             </div>
             <div className={style.post}>
-                <Post/>
-                <Post/>
-                <Post/>
-                <Post/>
+                <Post message = 'Hi, how are you?' likes={0}/>
+                <Post message = "it's my first !"  likes={23}/>
             </div>
         </div>
     )
