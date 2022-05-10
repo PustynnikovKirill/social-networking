@@ -7,7 +7,7 @@ export const MyPosts = () => {
     return (
         <div>
             <div>
-                My posts
+ ё               My posts
                 <div>
                     <textarea></textarea>
                     <button>Add post</button>
