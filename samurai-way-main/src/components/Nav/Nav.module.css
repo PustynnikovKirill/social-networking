@@ -1,7 +1,18 @@
 .nav {
     grid-area: n;
     background-color: #268383;
+    /*внутренние поля со всех сторонг элемента*/
+    padding: 20px;
 }
-.item {
-    color: aliceblue;
+.item a{
+    color: white;
+    /*убираем нижнее подчеркивание */
+    text-decoration: none;
+
+
+}
+/*если у a есть класс active то будешь золотым  */
+/*а, так как она лежит в Navlink*/
+.item a.activeLink {
+    color:darkgoldenrod;
 }
