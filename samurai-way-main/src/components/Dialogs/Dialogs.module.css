@@ -1,0 +1,33 @@
+.dialogs {
+    /*говорим, что это гриды */
+    display: grid;
+
+    /*говорим, что будет две колонки, и все их будет 2 */
+    grid-template-columns: 2fr 10fr;
+
+
+}
+
+.dialogsItems {
+
+    /*выравнивание со всех сторон*/
+    padding: 10px;
+}
+
+/*если в dialogsItems сидит class active, то сделай золотым*/
+.dialogsItems .active {
+    color:gold
+}
+
+.dialog {
+
+}
+
+.messages{
+
+    padding: 10px;
+
+}
+.message{
+
+}
