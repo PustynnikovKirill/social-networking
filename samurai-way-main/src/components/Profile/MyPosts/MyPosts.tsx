@@ -3,12 +3,17 @@ import style from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
 
 
-export const MyPosts = () => {
+export type PposDataType = {
+    id:string,
+    messages:string
+    likesCount:number
+}
+export type  PropsPost = {
+    postData:Array<PposDataType>
+}
+export const MyPosts = (props: PropsPost) => {
 
-    let  postData = [
-        {id:'1', messages:'Hi, how are you?',likesCount:11 },
-        {id:'2', messages:"it's my first !" ,likesCount:12}
-]
+
     return (
         <div className={style.postsBlock}>
             <div>
@@ -23,7 +28,7 @@ export const MyPosts = () => {
                 </div>
             </div>
             <div className={style.post}>
-                {postData.map(el => {
+                {props.postData.map(el => {
                     return (
                         <Post message = {el.messages} likes={el.likesCount}/>
                     )
