@@ -3,11 +3,12 @@ import style from './Message.module.css';
 
 
 export type MessageType = {
-    message: string
+    id: string
+    messages: string
 }
 
-export const Message = (props: MessageType) => {
+export const Message:React.FC<MessageType> = (props) => {
     return (
-        <div className={style.message}>{props.message}</div>
+        <div className={style.message}>{props.messages}</div>
     )
 }
