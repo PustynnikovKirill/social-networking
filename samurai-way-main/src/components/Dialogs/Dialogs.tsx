@@ -16,14 +16,14 @@ export const Dialogs:React.FC<DialogsType> = (props) => {
             <div className={style.dialogsItems}>
                 {props.state.dialogs.map(el => {
                  return (
-                     <DialogItem  name={el.name} id={el.id}/>
+                     <DialogItem key={el.id} name={el.name} id={el.id}/>
                  )
                 })}
             </div>
             <div className={style.messages}>
                 {props.state.messages.map(el=>{
                     return (
-                        <Message id={el.id} messages={el.messages}/>
+                        <Message key={el.id} id={el.id} messages={el.messages}/>
                     )
                 })}
             </div>
