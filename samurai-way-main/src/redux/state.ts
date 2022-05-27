@@ -35,7 +35,18 @@ export type StoreType = {
     _rerenderEntireTree:()=>void
     subscribe:(observer: () => void)=>void
     getState:()=>RootStateType
+    dispatch:(action:ActionsTypes)=>void
 }
+
+export type AddPostActionType = {
+    type:'ADD-POST'
+}
+
+export type ChanchNewTextActionType = {
+    type:'UPDATE-NEW-POST-TEXT'
+    newText:string
+}
+export type ActionsTypes = AddPostActionType|ChanchNewTextActionType
 
 export let store: StoreType = {
     _state: {
@@ -88,6 +99,22 @@ export let store: StoreType = {
     },
     getState() {
         return this._state
+    },
+    dispatch(action){
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: '3',
+                messages: this._state.profilePage.newPostText,
+                likesCount: 17
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._rerenderEntireTree();
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText = action.newText;
+            this._rerenderEntireTree();
+        }
+
     }
 
 
