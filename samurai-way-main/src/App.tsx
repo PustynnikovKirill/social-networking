@@ -9,8 +9,6 @@ import {ActionsTypes, RootStateType} from "./redux/state";
 
 export type AppPropsType = {
     state:RootStateType
-    addPost:()=>void
-    updateNewPostText:(newText:string)=>void
     dispatch:(action:ActionsTypes)=>void
 }
 
