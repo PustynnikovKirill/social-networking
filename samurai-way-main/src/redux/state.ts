@@ -1,3 +1,9 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
+
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
@@ -10,6 +16,7 @@ export type PostType = {
 export type  DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 export type DialogType = {
     id: string
@@ -32,21 +39,21 @@ export type StoreType = {
     _state: RootStateType
     updateNewPostText: (newText: string) => void
     addPost: () => void
-    _rerenderEntireTree:()=>void
-    subscribe:(observer: () => void)=>void
-    getState:()=>RootStateType
-    dispatch:(action:ActionsTypes)=>void
+    _rerenderEntireTree: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type AddPostActionType = {
-    type:'ADD-POST'
+    type: 'ADD-POST'
 }
 
 export type ChanchNewTextActionType = {
-    type:'UPDATE-NEW-POST-TEXT'
-    newText:string
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
 }
-export type ActionsTypes = AddPostActionType|ChanchNewTextActionType
+export type ActionsTypes = AddPostActionType | ChanchNewTextActionType
 
 export let store: StoreType = {
     _state: {
@@ -73,7 +80,8 @@ export let store: StoreType = {
                 {id: '3', messages: 'Yo'},
                 {id: '4', messages: 'Yo'},
                 {id: '5', messages: 'Yo'},
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: {}
     },
@@ -100,8 +108,8 @@ export let store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch(action){
-        if (action.type === 'ADD-POST') {
+    dispatch(action) {
+        if (action.type === ADD_POST) {
             const newPost: PostType = {
                 id: '3',
                 messages: this._state.profilePage.newPostText,
@@ -110,12 +118,43 @@ export let store: StoreType = {
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._rerenderEntireTree();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._rerenderEntireTree();
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._rerenderEntireTree(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messages.push({id: '6', messages: body})
+            this._rerenderEntireTree(this._state);
         }
 
     }
 
+}
 
+
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST
+    }
+}
+export const updateNewPostTextActionCreator = (text: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }
+}
+export const sendMessageCreator = () => {
+    return {
+        type: SEND_MESSAGE
+    }
+}
+export const updateNewMessageBodyCreator = (body:string) => {
+    return {
+        type:UPDATE_NEW_MESSAGE_BODY,
+        body:body
+    }
 }

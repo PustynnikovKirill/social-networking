@@ -5,11 +5,12 @@ import {Nav} from "./components/Nav/Nav";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {ActionsTypes, RootStateType} from "./redux/state";
+import {ActionsTypes, RootStateType, StoreType} from "./redux/state";
 
 export type AppPropsType = {
     state:RootStateType
     dispatch:(action:ActionsTypes)=>void
+    store:StoreType
 }
 
 export const App:React.FC<AppPropsType> = (props) => {
@@ -21,7 +22,7 @@ export const App:React.FC<AppPropsType> = (props) => {
             <Header/>
             <Nav/>
             <div className='app-wrapper-content'>
-                <Route path = '/dialogs' render = {()=> <Dialogs state = {props.state.dialogsPage}/>}/>
+                <Route path = '/dialogs' render = {()=> <Dialogs  store={props.store}/>}/>
                 <Route path = '/profile' render = {()=> <Profile state = {props.state.profilePage} dispatch={props.dispatch}/>}/>
             </div>
         </div>
