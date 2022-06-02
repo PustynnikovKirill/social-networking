@@ -1,12 +1,6 @@
-import {profileReducer} from "./profile.reducer";
-import {dialogsReducer} from "./dialogs.reducer";
+import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profile.reducer";
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs.reducer";
 import {sidebarReducer} from "./sidebar.reducer";
-
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
 
 
 export type ProfilePageType = {
@@ -119,25 +113,3 @@ export type ChangeNewTextActionType = ReturnType<typeof updateNewPostTextActionC
 export type UpdateMessageType = ReturnType<typeof updateNewMessageBodyCreator>
 export type SendMessage = ReturnType<typeof sendMessageCreator>
 
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
-    } as const
-}
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    } as const
-}
-export const updateNewMessageBodyCreator = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    } as const
-}
-export const sendMessageCreator = () => {
-    return {
-        type: SEND_MESSAGE
-    } as const
-}

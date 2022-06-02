@@ -16,3 +16,15 @@ export const dialogsReducer = (state, action) => {
             return state
     }
 }
+
+export const updateNewMessageBodyCreator = (body: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
+    } as const
+}
+export const sendMessageCreator = () => {
+    return {
+        type: SEND_MESSAGE
+    } as const
+}

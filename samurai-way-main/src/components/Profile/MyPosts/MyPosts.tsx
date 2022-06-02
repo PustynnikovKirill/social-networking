@@ -4,10 +4,9 @@ import {Post} from "./Posts/Post";
 import {} from "../../../index";
 import {
     ActionsTypes,
-    addPostActionCreator,
     ProfilePageType,
-    updateNewPostTextActionCreator
 } from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile.reducer";
 
 type MyPostsType = {
     postData: ProfilePageType
