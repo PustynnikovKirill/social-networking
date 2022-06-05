@@ -45,6 +45,7 @@ export type StoreType = {
 }
 
 
+
 export let store: StoreType = {
     _state: {
         profilePage: {

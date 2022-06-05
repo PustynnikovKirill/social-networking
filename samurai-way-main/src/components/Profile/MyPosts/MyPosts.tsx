@@ -5,7 +5,7 @@ import {} from "../../../index";
 import {
     ActionsTypes,
     ProfilePageType,
-} from "../../../redux/state";
+} from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile.reducer";
 
 type MyPostsType = {
