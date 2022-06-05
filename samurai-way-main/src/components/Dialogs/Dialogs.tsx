@@ -6,22 +6,27 @@ import {DialogsPageType, StoreType} from "../../redux/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs.reducer";
 
 export type DialogsType = {
-    store:StoreType
+    updateNewMessageBody:(body:string)=>void
+    sendMessage:()=>void
+    dialogsPage:any
 }
 
 export const Dialogs:React.FC<DialogsType> = (props) => {
-    let state = props.store.getState().dialogsPage
+    let state = props.dialogsPage
+    //let state = props.store.getState().dialogsPage
 
     let dialogsElements = state.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
     let messagesElement =   state.messages.map(el=><Message key={el.id} id={el.id} messages={el.messages}/>)
     let newMessageBody =   state.newMessageBody;
 
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessage()
+        //props.store.dispatch(sendMessageCreator())
     }
     let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(body)
+        //props.store.dispatch(updateNewMessageBodyCreator(body))
     }
     return (
         <div className={style.dialogs}>
