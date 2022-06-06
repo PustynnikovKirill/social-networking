@@ -6,9 +6,10 @@ import {
     ActionsTypes,
     ProfilePageType,
 } from "../../../redux/store";
+import {InitialStateType} from "../../../redux/profile.reducer";
 
 type MyPostsType = {
-    postData: ProfilePageType
+    postData: InitialStateType
     updateNewPostText:(text:string)=>void
     addPost:()=>void
     newPostText:string

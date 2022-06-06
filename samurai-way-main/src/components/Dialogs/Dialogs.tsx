@@ -3,21 +3,21 @@ import style from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPageType, StoreType} from "../../redux/store";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs.reducer";
+import {InitialStateType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs.reducer";
+import {AppRootStateType} from "../../redux/redux-store";
 
 export type DialogsType = {
     updateNewMessageBody:(body:string)=>void
     sendMessage:()=>void
-    dialogsPage:any
+    dialogsPage:InitialStateType
 }
-
 export const Dialogs:React.FC<DialogsType> = (props) => {
     let state = props.dialogsPage
     //let state = props.store.getState().dialogsPage
 
-    let dialogsElements = state.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    let messagesElement =   state.messages.map(el=><Message key={el.id} id={el.id} messages={el.messages}/>)
-    let newMessageBody =   state.newMessageBody;
+    let dialogsElements = props.dialogsPage.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    let messagesElement =   props.dialogsPage.messages.map(el=><Message key={el.id} id={el.id} messages={el.messages}/>)
+    let newMessageBody =   props.dialogsPage.newMessageBody;
 
     let onSendMessageClick = () => {
         props.sendMessage()

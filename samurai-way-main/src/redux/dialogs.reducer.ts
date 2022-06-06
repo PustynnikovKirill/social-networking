@@ -3,6 +3,8 @@ import {ActionsTypes} from "./store";
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
+export type InitialStateType = typeof initialState
+
 let initialState = {
         dialogs: [
             {id: '1', name: 'Dimych'},

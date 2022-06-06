@@ -5,13 +5,14 @@ import {Message} from "./Message/Message";
 import {DialogsPageType, StoreType} from "../../redux/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs.reducer";
 import {Dialogs} from "./Dialogs";
+import {RootStoreType} from "../../redux/redux-store";
 
 export type DialogsType = {
-    store:StoreType
+    store:RootStoreType
 }
 
 export const DialogsContainer:React.FC<DialogsType> = (props) => {
-    let state = props.store.getState().dialogsPage
+    let state = props.store.getState()
 
     let onSendMessageClick = () => {
         props.store.dispatch(sendMessageCreator())
@@ -24,7 +25,7 @@ export const DialogsContainer:React.FC<DialogsType> = (props) => {
     return (
         <Dialogs updateNewMessageBody={onNewMessageChange}
                  sendMessage={onSendMessageClick}
-                 dialogsPage={state}
+                 dialogsPage={state.dialogsPage}
         />
     );
 }

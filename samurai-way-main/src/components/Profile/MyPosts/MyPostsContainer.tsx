@@ -5,11 +5,11 @@ import {
     ProfilePageType,
 } from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile.reducer";
-import {AppRootStateType} from "../../../redux/redux-store";
+import {AppRootStateType, RootStoreType} from "../../../redux/redux-store";
 import {MyPosts} from "./MyPosts";
 
 type MyPostsType = {
-    store:any
+    store:RootStoreType
 }
 
 
@@ -26,6 +26,6 @@ export const MyPostsContainer: FC<MyPostsType> = (props) => {
     }
 
     return (
-       <MyPosts updateNewPostText={onPostChange} addPost={addPost} postData={state.profilePage.posts} newPostText={state.profilePage.newPostText} />
+       <MyPosts updateNewPostText={onPostChange} addPost={addPost} postData={state.profilePage} newPostText={state.profilePage.newPostText} />
     )
 }

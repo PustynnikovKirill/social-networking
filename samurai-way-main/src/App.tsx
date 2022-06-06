@@ -6,13 +6,13 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {ActionsTypes, RootStateType, StoreType} from "./redux/store";
-import {AppRootStateType} from "./redux/redux-store";
+import {AppRootStateType, RootStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 export type AppPropsType = {
     state:AppRootStateType
     dispatch:(action:ActionsTypes)=>void
-    store:any
+    store:RootStoreType
 }
 
 export const App:React.FC<AppPropsType> = (props) => {

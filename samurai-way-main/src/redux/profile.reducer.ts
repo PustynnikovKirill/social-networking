@@ -3,6 +3,8 @@ import {ActionsTypes, PostType} from "./store";
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
+export type InitialStateType = typeof initialState
+
 const initialState = {
         posts: [
             {id: '1', messages: 'Hi, how are you?', likesCount: 11},
