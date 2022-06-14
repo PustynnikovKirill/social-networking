@@ -6,28 +6,35 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 export type InitialStateType = typeof initialState
 
 const initialState = {
-        posts: [
-            {id: '1', messages: 'Hi, how are you?', likesCount: 11},
-            {id: '2', messages: "it's my first !", likesCount: 12},
-        ],
-        newPostText: 'it-kamasutra.com'
+    posts: [
+        {id: '1', messages: 'Hi, how are you?', likesCount: 11},
+        {id: '2', messages: "it's my first !", likesCount: 12},
+    ],
+    newPostText: 'it-kamasutra.com'
 
-    }
+}
 
-export const profileReducer = (state = initialState, action:ActionsTypes) => {
+export const profileReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             const newPost: PostType = {
                 id: '3',
                 messages: state.newPostText,
                 likesCount: 17
             }
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
+            }
+
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText
+            }
+        }
         default:
             return state
 

@@ -15,3 +15,6 @@ export let store = createStore(redusers)
 export type AppRootStateType = ReturnType<typeof redusers>
 
 export type RootStoreType = typeof store
+
+// @ts-ignore
+window.store = store
