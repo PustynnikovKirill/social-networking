@@ -3,6 +3,15 @@ import {ActionsTypes} from "./store";
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
+
+export type DialogType = {
+    id:string,
+    name:string,
+}
+export type MessageType = {
+    id:string,
+    messages:string
+}
 export type InitialStateType = typeof initialState
 
 let initialState = {
@@ -12,15 +21,15 @@ let initialState = {
             {id: '3', name: 'Sveta'},
             {id: '4', name: 'Sasha'},
             {id: '5', name: 'Viktor'},
-            {id: '6', name: 'Valera'},
-        ],
+            {id: '6', name: 'Valera'}
+        ] as Array<DialogType>,
         messages: [
             {id: '1', messages: 'Hi'},
             {id: '2', messages: 'How is your it-kamasutra!'},
             {id: '3', messages: 'Yo'},
             {id: '4', messages: 'Yo'},
             {id: '5', messages: 'Yo'},
-        ],
+        ] as Array<MessageType>,
         newMessageBody: ''
     }
 
