@@ -1,7 +1,7 @@
 // import {ActionsTypeUsersReducer} from "./store";
 
 
-export type InitialStateType = {users:Array<UserType>}
+export type InitialStateType = {users:Array<UserType>, pageSize:number,totalUsersCount: number,currentPage:number}
 
 export type UserType = {
     id: string,
@@ -11,8 +11,12 @@ export type UserType = {
     status: string,
     location: {city: string, country: string}
 }
+
 const initialState:InitialStateType = {
     users: [],
+    pageSize: 5,
+    totalUsersCount: 20,
+    currentPage: 2
 }
 
 
