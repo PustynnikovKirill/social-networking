@@ -30,13 +30,15 @@ export const usersReducer = (state = initialState, action: ActionsTypeUsersReduc
             return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: false} : el)}
         case 'SET_USERS':
             return {...state, users: [...state.users, ...action.users ]}
+        case 'SET_CURRENT_PAGE':
+            return {...state, currentPage:action.currentPage}
         default:
             return state
 
     }
 
 }
-export type ActionsTypeUsersReducer = followACType | unfollowACType | setUsersACType
+export type ActionsTypeUsersReducer = followACType | unfollowACType | setUsersACType | setCurrentPageType
 type followACType = ReturnType<typeof followAC>
 export const followAC = (userId: string) => {
     return {
@@ -56,5 +58,12 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: 'SET_USERS',
         users,
+    } as const
+}
+type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
+export const setCurrentPageAC = (currentPage:number) => {
+    return {
+        type: 'SET_CURRENT_PAGE',
+        currentPage,
     } as const
 }
