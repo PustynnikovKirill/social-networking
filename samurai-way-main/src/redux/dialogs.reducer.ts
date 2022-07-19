@@ -13,7 +13,7 @@ export type MessageType = {
     messages:string
 }
 export type InitialStateType = typeof initialState
-
+vc
 let initialState = {
         dialogs: [
             {id: '1', name: 'Dimych'},
