@@ -5,11 +5,11 @@ export type InitialStateType = {users:Array<UserType>, pageSize:number,totalUser
 
 export type UserType = {
     id: string,
-    photoUrl:string,
+    photoUrl:{small?: string, large?:string},
     followed:boolean,
     fullName: string,
     status: string,
-    location: {city: string, country: string}
+    location: {city?: string, country?: string}
 }
 
 const initialState:InitialStateType = {

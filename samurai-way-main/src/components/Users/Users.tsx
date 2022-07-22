@@ -1,12 +1,16 @@
 import React from 'react'
-import {InitialStateType, UserType} from "../../redux/users.reducer";
 import style from './users.module.css'
-import {mapDispatchToPropsType, MapStateToPropsType, UsersPropsType} from "./UsersContainer";
-import * as axios from "axios";
+import {UsersPropsType} from "./UsersContainer";
+import axios from "axios";
 import userPhoto from '../../assets/images/user.png'
 
 
-export class Users extends React.Component {
+export class Users extends React.Component<UsersPropsType> {
+
+    constructor(props:UsersPropsType) {
+        super(props);
+    }
+
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
@@ -14,7 +18,7 @@ export class Users extends React.Component {
                 this.props.setTotalUsersCount(response.data.totalCount);
             })
     }
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber:number) => {
         this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
@@ -30,10 +34,11 @@ export class Users extends React.Component {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
+
         return <div>
             <div>
                 {pages.map(p => {
-                        return <span className = {this.props.currentPage === p && style.selectedPage}
+                        return <span className={this.props.currentPage === p ? style.selectedPage : ''}
                                      onClick={()=>{this.onPageChanged(p)}}>{p}</span>
                     }
                 )}
@@ -42,7 +47,7 @@ export class Users extends React.Component {
                 this.props.usersPages.users.map(el => <div key={el.id}>
                 <span>
                     <div>
-                        <img src={el.photoUrl.small !== null ? el.photoUrl.small : userPhoto} className={style.photo}/>
+                        <img src={el.photoUrl?.small ? el.photoUrl.small : userPhoto} className={style.photo}/>
                     </div>
                     <div>
                         {el.followed
@@ -62,8 +67,8 @@ export class Users extends React.Component {
                         <div>{el.status}</div>
                     </span>
                     <span>
-                        <div>{el.location.country}</div>
-                        <div>{el.location.city}</div>
+                        <div>{el.location?.country}</div>
+                        <div>{el.location?.city}</div>
                     </span>
                 </span>
                 </div>)

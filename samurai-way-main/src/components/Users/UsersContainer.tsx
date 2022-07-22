@@ -10,7 +10,7 @@ import {
     unfollowAC,
     UserType
 } from "../../redux/users.reducer";
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {Users} from "./Users";
 
 export type MapStateToPropsType = {
@@ -27,6 +27,7 @@ export type mapDispatchToPropsType = {
     setCurrentPage:(pageNumber:number)=>void,
     setTotalUsersCount:(totalCount:number)=>void
 }
+
 export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType
 
 let mapStateToProps = (state:AppRootStateType):MapStateToPropsType => {
@@ -56,4 +57,5 @@ let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+//@ts-ignore
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
