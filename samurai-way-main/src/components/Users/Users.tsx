@@ -5,7 +5,7 @@ import axios from "axios";
 import userPhoto from '../../assets/images/user.png'
 
 
-export class Users extends React.Component<UsersPropsType> {
+export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     constructor(props:UsersPropsType) {
         super(props);
