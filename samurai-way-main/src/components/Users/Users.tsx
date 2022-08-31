@@ -6,34 +6,34 @@ import axios from "axios";
 import userPhoto from '../../assets/images/user.png'
 
 
-
-export const Users: React.FC<UsersPropsType> = (props) => {
-    let getUsers = () => {
-        if (props.usersPages.users.length === 0) {
+export class Users extends React.Component{
+    getUsers = () => {
+        if (this.props.usersPages.users.length === 0) {
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items)
             })
 
         }
     }
 
-    return <div>
-        <button onClick={getUsers}>Get Users</button>
-        {
-            props.usersPages.users.map(el => <div key={el.id}>
+    render(){
+        return <div>
+            <button onClick={this.getUsers}>Get Users</button>
+            {
+                this.props.usersPages.users.map(el => <div key={el.id}>
                 <span>
                     <div>
                         <img className={style.photo} src={el.photos.small != null ? el.photos.small: userPhoto}/>
                     </div>
                     <div>
                         {el.followed
-                            ? <button onClick={() => {props.unfollow(el.id)}}> Unfollow</button>
-                            : <button onClick={() => {props.follow(el.id)}}>Follow</button>
+                            ? <button onClick={() => {this.props.unfollow(el.id)}}> Unfollow</button>
+                            : <button onClick={() => {this.props.follow(el.id)}}>Follow</button>
                         }
 
                     </div>
                 </span>
-                <span>
+                    <span>
                     <span>
                         <div>{el.name}</div>
                         <div>{el.status}</div>
@@ -43,7 +43,49 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                         <div>{'el.location.city'}</div>
                     </span>
                 </span>
-            </div>)
-        }
-    </div>
+                </div>)
+            }
+        </div>
+    }
 }
+
+// export const Users: React.FC<UsersPropsType> = (props) => {
+//     let getUsers = () => {
+//         if (props.usersPages.users.length === 0) {
+//             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+//                 props.setUsers(response.data.items)
+//             })
+//
+//         }
+//     }
+//
+//     return <div>
+//         <button onClick={getUsers}>Get Users</button>
+//         {
+//             props.usersPages.users.map(el => <div key={el.id}>
+//                 <span>
+//                     <div>
+//                         <img className={style.photo} src={el.photos.small != null ? el.photos.small: userPhoto}/>
+//                     </div>
+//                     <div>
+//                         {el.followed
+//                             ? <button onClick={() => {props.unfollow(el.id)}}> Unfollow</button>
+//                             : <button onClick={() => {props.follow(el.id)}}>Follow</button>
+//                         }
+//
+//                     </div>
+//                 </span>
+//                 <span>
+//                     <span>
+//                         <div>{el.name}</div>
+//                         <div>{el.status}</div>
+//                     </span>
+//                     <span>
+//                         <div>{'el.location.country'}</div>
+//                         <div>{'el.location.city'}</div>
+//                     </span>
+//                 </span>
+//             </div>)
+//         }
+//     </div>
+// }
