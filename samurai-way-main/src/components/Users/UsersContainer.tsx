@@ -3,7 +3,7 @@ import {Users} from "./Users";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {followAC, InitialStateType, setUsersAC, unfollowAC, UserType} from "../../redux/users.reducer";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 
 export type MapStateToPropsType = {
     usersPages:InitialStateType
@@ -34,4 +34,4 @@ let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(Users)
