@@ -8,7 +8,7 @@ import preloader from "../../assets/images/Spinner-1s-200px (2).svg"
 import {
     follow,
     InitialStateType,
-    setCurrentPage,
+    setCurrenPage,
     setTotalUsersCount,
     setUsers, toggleIsFetching,
     unfollow,
@@ -87,33 +87,7 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         isFetching: state.usersPages.isFetching
     }
 }
-// let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-//     return {
-//         follow: (userId: string) => {
-//             dispatch(followAC(userId));
-//         },
-//         unfollow: (userId: string) => {
-//             dispatch(unfollowAC(userId));
-//         },
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsersAC(users));
-//         },
-//         setCurrentPage: (pageNumber) => {
-//             dispatch(setCurrenPageAC(pageNumber));
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching:boolean)=>{
-//             dispatch(isFetchingAC(isFetching))
-//         },
-//     }
-// }
-export default compose<React.FC>(connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
+
+export default compose<React.FC>(connect(mapStateToProps,  {
+    follow, unfollow, setUsers, setCurrenPage, setTotalUsersCount, toggleIsFetching,
 }))(UsersContainer)

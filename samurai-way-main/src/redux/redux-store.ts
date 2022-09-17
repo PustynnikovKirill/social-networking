@@ -4,7 +4,7 @@ import {dialogsReducer} from "./dialogs.reducer";
 import {sidebarReducer} from "./sidebar.reducer";
 import {usersReducer} from "./users.reducer";
 
-let reduser = combineReducers({
+let reducer = combineReducers({
     profilePage:profileReducer,
     dialogsPage:dialogsReducer,
     sidebarPage:sidebarReducer,
@@ -12,9 +12,9 @@ let reduser = combineReducers({
 
 })
 
-export let store = createStore(reduser)
+export let store = createStore(reducer)
 
-export type AppRootStateType = ReturnType<typeof reduser>
+export type AppRootStateType = ReturnType<typeof reducer>
 
 export type RootStoreType = typeof store
 

@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 
 
 const mapStateToProps = (state:AppRootStateType) => {
-    return{
+    return {
         postData:state.profilePage,
         newPostText: state.profilePage.newPostText
     }

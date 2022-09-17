@@ -1,5 +1,3 @@
-// import {ActionsTypeUsersReducer} from "./store";
-
 
 export type InitialStateType = {
     users: Array<UserType>,
@@ -76,8 +74,8 @@ export const setUsers = (users: Array<UserType>) => {
     } as const
 }
 
-type setCurrenPageACType = ReturnType<typeof setCurrentPage>
-export const setCurrentPage = (currentPage: number) => {
+type setCurrenPageACType = ReturnType<typeof setCurrenPage>
+export const setCurrenPage = (currentPage: number) => {
     return {
         type: 'SET_CURRENT_PAGE',
         currentPage,
