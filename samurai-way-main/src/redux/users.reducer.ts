@@ -1,5 +1,3 @@
-// import {ActionsTypeUsersReducer} from "./store";
-
 
 export type InitialStateType = {
     users: Array<UserType>,
@@ -54,44 +52,44 @@ export type ActionsTypeUsersReducer =
     | setCurrenPageACType
     | setTotalUsersCountACType
     | isFetchingACType
-type followACType = ReturnType<typeof followAC>
-export const followAC = (userId: string) => {
+type followACType = ReturnType<typeof follow>
+export const follow = (userId: string) => {
     return {
         type: 'FOLLOW',
         userId
     } as const
 }
-type unfollowACType = ReturnType<typeof unfollowAC>
-export const unfollowAC = (userId: string) => {
+type unfollowACType = ReturnType<typeof unfollow>
+export const unfollow = (userId: string) => {
     return {
         type: 'UNFOLLOW',
         userId,
     } as const
 }
-type setUsersACType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: Array<UserType>) => {
+type setUsersACType = ReturnType<typeof setUsers>
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: 'SET_USERS',
         users,
     } as const
 }
 
-type setCurrenPageACType = ReturnType<typeof setCurrenPageAC>
-export const setCurrenPageAC = (currentPage: number) => {
+type setCurrenPageACType = ReturnType<typeof setCurrenPage>
+export const setCurrenPage = (currentPage: number) => {
     return {
         type: 'SET_CURRENT_PAGE',
         currentPage,
     } as const
 }
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export const setTotalUsersCountAC = (totalCount: number) => {
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+export const setTotalUsersCount = (totalCount: number) => {
     return {
         type: 'SET_TOTAL_USERS_COUNT',
         totalCount,
     } as const
 }
-type isFetchingACType = ReturnType<typeof isFetchingAC>
-export const isFetchingAC = (isFetching: boolean) => {
+type isFetchingACType = ReturnType<typeof toggleIsFetching>
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE_IS_FETCHING',
         isFetching,

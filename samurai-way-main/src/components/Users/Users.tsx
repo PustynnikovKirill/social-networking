@@ -2,18 +2,19 @@ import React from "react";
 import style from "./users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {UserType} from "../../redux/users.reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersType = {
-    totalUsersCount:number,
-    pageSize:number,
-    currentPage:number,
-    onPageChange:(pageNumber:number)=>void,
-    users:Array<UserType>,
-    follow:(userId:string)=>void,
-    unfollow:(userId:string)=>void,
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    onPageChange: (pageNumber: number) => void,
+    users: Array<UserType>,
+    follow: (userId: string) => void,
+    unfollow: (userId: string) => void,
 }
 
-export let Users = (props:UsersType) => {
+export let Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -21,9 +22,11 @@ export let Users = (props:UsersType) => {
     }
     return <div>
         <div>
-            {pages.map(el=>{
-                return  <span className={props.currentPage === el ? style.selectedPage: ""}
-                              onClick={(e)=>{props.onPageChange(el)}}
+            {pages.map(el => {
+                return <span className={props.currentPage === el ? style.selectedPage : ""}
+                             onClick={(e) => {
+                                 props.onPageChange(el)
+                             }}
                 >{el}</span>
             })}
         </div>
@@ -31,12 +34,18 @@ export let Users = (props:UsersType) => {
             props.users.map(el => <div key={el.id}>
                 <span>
                     <div>
-                        <img className={style.photo} src={el.photos.small != null ? el.photos.small: userPhoto}/>
-                    </div>
+                        <NavLink to = {'/profile/' + el.id}>
+                        <img className={style.photo} src={el.photos.small != null ? el.photos.small : userPhoto}/>
+                        </NavLink>
+                        </div>
                     <div>
                         {el.followed
-                            ? <button onClick={() => {props.unfollow(el.id)}}>Unfollow</button>
-                            : <button onClick={() => {props.follow(el.id)}}>Follow</button>
+                            ? <button onClick={() => {
+                                props.unfollow(el.id)
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                props.follow(el.id)
+                            }}>Follow</button>
                         }
 
                     </div>
