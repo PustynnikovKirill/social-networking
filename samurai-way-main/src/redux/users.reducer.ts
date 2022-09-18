@@ -28,7 +28,6 @@ export const usersReducer = (state = initialState, action: ActionsTypeUsersReduc
     switch (action.type) {
         case 'FOLLOW':
             return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: true} : el)}
-
         case 'UNFOLLOW':
             return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: false} : el)}
         case 'SET_USERS':
@@ -74,8 +73,8 @@ export const setUsers = (users: Array<UserType>) => {
     } as const
 }
 
-type setCurrenPageACType = ReturnType<typeof setCurrenPage>
-export const setCurrenPage = (currentPage: number) => {
+type setCurrenPageACType = ReturnType<typeof setCurrentPage>
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET_CURRENT_PAGE',
         currentPage,

@@ -5,6 +5,17 @@ import {ProfileType} from "../components/Profile/ProfileContainer";
 
 export type InitialStateType = typeof initialState
 
+// type PostType = {
+//     id:string,
+//     messages:string,
+//     likesCount:string,
+// }
+// type initialStateType = {
+//     posts:Array<PostType>,
+//     profile: null | ProfileType,
+//     newPostText:string,
+// }
+
 const initialState = {
     posts: [
         {id: '1', messages: 'Hi, how are you?', likesCount: 11},
@@ -62,6 +73,7 @@ export const updateNewPostTextActionCreator = (text: string) => {
         newText: text
     } as const
 }
+
 export type setUserProfile = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile:ProfileType) => {
     return {

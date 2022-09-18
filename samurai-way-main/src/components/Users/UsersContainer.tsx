@@ -8,7 +8,7 @@ import preloader from "../../assets/images/Spinner-1s-200px (2).svg"
 import {
     follow,
     InitialStateType,
-    setCurrenPage,
+    setCurrentPage,
     setTotalUsersCount,
     setUsers, toggleIsFetching,
     unfollow,
@@ -89,5 +89,5 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 }
 
 export default compose<React.FC>(connect(mapStateToProps,  {
-    follow, unfollow, setUsers, setCurrenPage, setTotalUsersCount, toggleIsFetching,
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,
 }))(UsersContainer)
