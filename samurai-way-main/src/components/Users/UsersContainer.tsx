@@ -1,16 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {compose, Dispatch} from "redux";
-import axios from "axios";
+import {compose} from "redux";
 import {Users} from "./Users";
-import preloader from "../../assets/images/Spinner-1s-200px (2).svg"
 import {
     follow,
     InitialStateType,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsFetching,
+    setUsers, toggleFollowingProgress, toggleIsFetching,
     unfollow,
     UserType
 } from "../../redux/users.reducer";
@@ -24,7 +22,8 @@ export type MapStateToPropsType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress:any
 
 }
 
@@ -34,7 +33,8 @@ export type mapDispatchToPropsType = {
     setUsers: (users: Array<UserType>) => void,
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void,
-    toggleIsFetching:(isFetching:boolean)=>void
+    toggleIsFetching:(isFetching:boolean)=>void,
+    toggleFollowingProgress:(userId:string,followingInProgress: boolean)=>void
 
 }
 export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType
@@ -73,7 +73,9 @@ export class UsersContainer extends React.Component<UsersPropsType> {
                    users={this.props.usersPages.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-
+                   toggleIsFetching={this.props.toggleIsFetching}
+                   followingInProgress={this.props.followingInProgress}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         </>
     }
@@ -86,10 +88,11 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         pageSize: state.usersPages.pageSize,
         totalUsersCount: state.usersPages.totalUsersCount,
         currentPage: state.usersPages.currentPage,
-        isFetching: state.usersPages.isFetching
+        isFetching: state.usersPages.isFetching,
+        followingInProgress:state.usersPages.followingInProgress
     }
 }
 
 export default compose<React.FC>(connect(mapStateToProps,  {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,toggleFollowingProgress
 }))(UsersContainer)

@@ -13,6 +13,9 @@ type UsersType = {
     users: Array<UserType>,
     follow: (userId: string) => void,
     unfollow: (userId: string) => void,
+    toggleIsFetching:(isFetching:boolean)=>void,
+    followingInProgress: any[]
+    toggleFollowingProgress:(userId: string,followingInProgress: boolean)=>void
 }
 
 export let Users = (props: UsersType) => {
@@ -43,21 +46,24 @@ export let Users = (props: UsersType) => {
                         </div>
                     <div>
                         {el.followed
-                            ? <button onClick={() => {
+                            ? <button disabled={props.followingInProgress.some(id=>id===el.id)} onClick={() => {
+                                props.toggleFollowingProgress(el.id,true)
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {withCredentials: true, headers: {"API-KEY":'a05e4936-3d20-4899-8b3f-14b5bf4433fb'}})
                                     .then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.unfollow(el.id)
                                         }
+                                        props.toggleFollowingProgress(el.id,false)
                                     })
                             }}>Unfollow</button>
-                            : <button onClick={() => {
-
+                            : <button disabled={props.followingInProgress.some(id=>id===el.id)} onClick={() => {
+                                props.toggleFollowingProgress(el.id,true)
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {withCredentials: true, headers: {"API-KEY":'a05e4936-3d20-4899-8b3f-14b5bf4433fb'}})
                                     .then(response => {
                                         if (response.data.resultCode === 0) {
                                             props.follow(el.id)
                                         }
+                                        props.toggleFollowingProgress(el.id,false)
                                     })
 
                             }}>Follow</button>
