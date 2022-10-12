@@ -1,5 +1,7 @@
 import { PostType} from "./store";
 import {ProfileType} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 
 
@@ -18,8 +20,8 @@ export type InitialStateType = typeof initialState
 
 const initialState = {
     posts: [
-        {id: '1', messages: 'Hi, how are you?', likesCount: 11},
-        {id: '2', messages: "it's my first !", likesCount: 12},
+        {id: 1, messages: 'Hi, how are you?', likesCount: 11},
+        {id: 2, messages: "it's my first !", likesCount: 12},
     ],
     profile: null as null | ProfileType,
     newPostText: 'it-kamasutra.com',
@@ -35,7 +37,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
         }
         case "ADD_POST": {
             const newPost: PostType = {
-                id: '3',
+                id: 3,
                 messages: state.newPostText,
                 likesCount: 17
             }
@@ -80,4 +82,11 @@ export const setUserProfile = (profile:ProfileType) => {
         type: "SET_USERS_PROFILE",
         profile
     }as const
+}
+
+export const getUserProfile = (userId:number) => (dispatch:Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
 }

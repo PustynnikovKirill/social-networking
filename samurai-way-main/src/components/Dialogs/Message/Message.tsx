@@ -3,7 +3,7 @@ import style from './Message.module.css';
 
 
 export type MessageType = {
-    id: string
+    id: number
     messages: string
 }
 

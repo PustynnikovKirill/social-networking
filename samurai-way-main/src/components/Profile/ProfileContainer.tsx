@@ -1,21 +1,20 @@
 import React from 'react';
 import {AppRootStateType} from "../../redux/redux-store";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {setUserProfile} from "../../redux/profile.reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {getUserProfile} from "../../redux/profile.reducer";
 
 type PathParamsType = {
-    userId: string
+    userId: any
 }
 
 type MapStateToPropsType = {
     profile: ProfileType | null
 }
 export type mapDispatchToPropsProfileType = {
-    setUserProfile: (profile:ProfileType) => void
+    getUserProfile: (profile:ProfileType) => void
 }
 
 export type ProfilePropsType = MapStateToPropsType & mapDispatchToPropsProfileType
@@ -34,7 +33,7 @@ export type ProfileType = {
 	lookingForAJob: boolean;
 	lookingForAJobDescription: string;
 	fullName: string;
-	userId: string;
+	userId: number;
 	photos: {
         small: string;
         large: string;
@@ -46,12 +45,14 @@ class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
       let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            userId = 2
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
-            .then(response => {
-              this.props.setUserProfile(response.data)
-            })
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
+        this.props.getUserProfile(userId)
+        // usersAPI.getProfile(userId)
+        //     .then(response => {
+        //       this.props.setUserProfile(response.data)
+        //     })
     }
 
     render() {
@@ -71,4 +72,4 @@ let mapStateToProps = (state:AppRootStateType): MapStateToPropsType => ({
 // @ts-ignore
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default compose<React.FC> (connect(mapStateToProps,{setUserProfile})) (WithUrlDataContainerComponent)
+export default compose<React.FC> (connect(mapStateToProps,{getUserProfile})) (WithUrlDataContainerComponent)

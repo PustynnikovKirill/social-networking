@@ -8,7 +8,7 @@ export type ProfilePageType = {
     newPostText: string
 }
 export type PostType = {
-    id: string
+    id: number
     messages: string
     likesCount: number
 }
@@ -18,11 +18,11 @@ export type  DialogsPageType = {
     newMessageBody: string
 }
 export type DialogType = {
-    id: string
+    id: number
     name: string
 }
 export type MessageType = {
-    id: string
+    id: number
     messages: string
 }
 export type SidebareType = {}
@@ -50,27 +50,27 @@ export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {id: '1', messages: 'Hi, how are you?', likesCount: 11},
-                {id: '2', messages: "it's my first !", likesCount: 12},
+                {id: 1, messages: 'Hi, how are you?', likesCount: 11},
+                {id: 2, messages: "it's my first !", likesCount: 12},
             ],
             newPostText: 'it-kamasutra.com'
 
         },
         dialogsPage: {
             dialogs: [
-                {id: '1', name: 'Dimych'},
-                {id: '2', name: 'Andrey'},
-                {id: '3', name: 'Sveta'},
-                {id: '4', name: 'Sasha'},
-                {id: '5', name: 'Viktor'},
-                {id: '6', name: 'Valera'},
+                {id: 1, name: 'Dimych'},
+                {id: 2, name: 'Andrey'},
+                {id: 3, name: 'Sveta'},
+                {id: 4, name: 'Sasha'},
+                {id: 5, name: 'Viktor'},
+                {id: 6, name: 'Valera'},
             ],
             messages: [
-                {id: '1', messages: 'Hi'},
-                {id: '2', messages: 'How is your it-kamasutra!'},
-                {id: '3', messages: 'Yo'},
-                {id: '4', messages: 'Yo'},
-                {id: '5', messages: 'Yo'},
+                {id: 1, messages: 'Hi'},
+                {id: 2, messages: 'How is your it-kamasutra!'},
+                {id: 3, messages: 'Yo'},
+                {id: 4, messages: 'Yo'},
+                {id: 5, messages: 'Yo'},
             ],
             newMessageBody: ''
         },
@@ -82,7 +82,7 @@ export let store: StoreType = {
     },
     addPost() {
         const newPost: PostType = {
-            id: '3',
+            id: 3,
             messages: this._state.profilePage.newPostText,
             likesCount: 17
         }

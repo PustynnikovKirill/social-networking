@@ -5,7 +5,7 @@ import style from './DialogItem.module.css';
 
 
 export type DialogType = {
-    id: string
+    id: number
     name: string
 }
 
