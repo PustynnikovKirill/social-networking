@@ -46,10 +46,10 @@ export let Users = (props: UsersType) => {
                     <div>
                         {el.followed
                             ? <button disabled={props.followingInProgress.some(id=>id===el.id)} onClick={() => {
-                                props.follow(el.id)
+                                props.unfollow(el.id)
                             }}>Unfollow</button>
                             : <button disabled={props.followingInProgress.some(id=>id===el.id)} onClick={() => {
-                                props.unfollow(el.id)
+                                props.follow(el.id)
                             }}>Follow</button>
                         }
 

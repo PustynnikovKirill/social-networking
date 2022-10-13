@@ -5,11 +5,13 @@ import {Message} from "./Message/Message";
 import {DialogsPageType, StoreType} from "../../redux/store";
 import {InitialStateType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs.reducer";
 import {AppRootStateType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 export type DialogsType = {
     updateNewMessageBody:(body:string)=>void
     sendMessage:()=>void
     dialogsPage:InitialStateType
+    isAuth:boolean
 }
 export const Dialogs:React.FC<DialogsType> = (props) => {
     let state = props.dialogsPage
@@ -27,6 +29,9 @@ export const Dialogs:React.FC<DialogsType> = (props) => {
         let body = e.target.value
         props.updateNewMessageBody(body)
         //props.store.dispatch(updateNewMessageBodyCreator(body))
+    }
+    if (!props.isAuth) {
+            return <Redirect to={'/login'}/>
     }
     return (
         <div className={style.dialogs}>

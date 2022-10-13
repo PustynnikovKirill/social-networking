@@ -6,9 +6,7 @@ import {Users} from "./Users";
 import {
     follow, getUsersTC,
     InitialStateType,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowingProgress, toggleIsFetching,
+    setCurrentPage, toggleFollowingProgress, unfollow,
     UserType
 } from "../../redux/users.reducer";
 import {Preloader} from "../common/Preloader/Preloader";
@@ -83,8 +81,9 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 }
 
 export default compose<React.FC>(connect(mapStateToProps,  {
-    follow,
+    follow,unfollow,
     setCurrentPage,toggleFollowingProgress,
-    getUsersTC
+    getUsersTC,
+
 
 }))(UsersContainer)
