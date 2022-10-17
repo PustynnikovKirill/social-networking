@@ -14,6 +14,7 @@ import {usersAPI} from "../../api/api";
 
 
 
+
 export type MapStateToPropsType = {
     usersPages: InitialStateType,
     pageSize: number,
@@ -80,7 +81,7 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     }
 }
 
-export default compose<React.FC>(connect(mapStateToProps,  {
+export default  compose<React.FC>(connect(mapStateToProps,  {
     follow,unfollow,
     setCurrentPage,toggleFollowingProgress,
     getUsersTC,

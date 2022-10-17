@@ -1,27 +1,30 @@
-import React, {ChangeEvent} from 'react';
-import style from './Dialogs.module.css';
-import {DialogItem} from "./DialogItem/DialogItem";
-import {Message} from "./Message/Message";
-import {DialogsPageType, StoreType} from "../../redux/store";
+import React from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs.reducer";
 import {Dialogs} from "./Dialogs";
-import {AppRootStateType, RootStoreType} from "../../redux/redux-store";
+import {AppRootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
-let mapStateToProps = (state:AppRootStateType) =>{
-    return{
-        dialogsPage:state.dialogsPage,
-        isAuth:state.auth.isAuth
-    }
-}
-let mapDispatchToProps = (dispatch:any) => {
+let mapStateToProps = (state: AppRootStateType) => {
     return {
-        updateNewMessageBody:(body:string)=>{dispatch(updateNewMessageBodyCreator(body))},
-        sendMessage:()=>{dispatch(sendMessageCreator())}
-
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth,
     }
 }
-export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        updateNewMessageBody: (body: string) => {
+            dispatch(updateNewMessageBodyCreator(body))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageCreator())
+        }
+    }
+}
+
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 
