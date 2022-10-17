@@ -30,10 +30,16 @@ export const App: React.FC<AppPropsType> = (props) => {
                         <WithAuthRedirect>
                             <DialogsContainer/>
                         </WithAuthRedirect>
-                    )
-                    }/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    )}/>
+                    <Route path='/profile/:userId?' render={() =>
+                        <WithAuthRedirect>
+                            <ProfileContainer/>
+                        </WithAuthRedirect>}/>
+
+                    <Route path='/users' render={() =>
+                        <WithAuthRedirect>
+                            <UsersContainer/>
+                        </WithAuthRedirect>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>

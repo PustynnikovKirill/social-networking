@@ -55,7 +55,6 @@ class ProfileContainer extends React.Component<PropsType>{
 
     render() {
 
-
         return (
             <div>
                 <Profile {...this.props} profile={this.props.profile}/>
@@ -65,12 +64,9 @@ class ProfileContainer extends React.Component<PropsType>{
 }
 
 
-
 let mapStateToProps = (state:AppRootStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
 })
 
-// @ts-ignore
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default compose<React.FC> (connect(mapStateToProps,{getUserProfile})) (WithUrlDataContainerComponent)
+export default compose<React.FC> (connect(mapStateToProps,{getUserProfile}), withRouter) (ProfileContainer)

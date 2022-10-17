@@ -86,5 +86,4 @@ export default  compose<React.FC>(connect(mapStateToProps,  {
     setCurrentPage,toggleFollowingProgress,
     getUsersTC,
 
-
 }))(UsersContainer)
