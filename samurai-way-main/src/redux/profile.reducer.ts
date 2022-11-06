@@ -29,7 +29,7 @@ const initialState = {
 
 
 }
-export type ActionsType = setUserProfile | updateNewPostTextActionCreatorType | addPostActionCreatorType | setStatusType
+export type ActionsType = setUserProfile | addPostActionCreatorType | setStatusType
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
@@ -39,7 +39,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
         case "ADD_POST": {
             const newPost: PostType = {
                 id: 3,
-                messages: state.newPostText,
+                messages: action.newPostText,
                 likesCount: 17
             }
             return {
@@ -49,12 +49,7 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
             }
 
         }
-        case "UPDATE_NEW_POST_TEXT": {
-            return {
-                ...state,
-                newPostText: action.newText
-            }
-        }
+
         case "SET_STATUS": {
             return {
                 ...state,
@@ -69,17 +64,10 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
 }
 
 export type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostText:string) => {
     return {
-        type: "ADD_POST"
-    } as const
-}
-
-type updateNewPostTextActionCreatorType = ReturnType<typeof updateNewPostTextActionCreator>
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: "UPDATE_NEW_POST_TEXT",
-        newText: text
+        type: "ADD_POST",
+        newPostText
     } as const
 }
 

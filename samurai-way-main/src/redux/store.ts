@@ -1,5 +1,5 @@
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profile.reducer";
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs.reducer";
+import {addPostActionCreator, profileReducer} from "./profile.reducer";
+import {dialogsReducer, sendMessageCreator} from "./dialogs.reducer";
 import {sidebarReducer} from "./sidebar.reducer";
 
 
@@ -101,16 +101,16 @@ export let store: StoreType = {
     },
     dispatch(action) {
         // this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._rerenderEntireTree();
     }
 
 }
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType | UpdateMessageType | SendMessage
+export type ActionsTypes = AddPostActionType | SendMessage
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type ChangeNewTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-export type UpdateMessageType = ReturnType<typeof updateNewMessageBodyCreator>
+// export type ChangeNewTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+// export type UpdateMessageType = ReturnType<typeof updateNewMessageBodyCreator>
 export type SendMessage = ReturnType<typeof sendMessageCreator>
 

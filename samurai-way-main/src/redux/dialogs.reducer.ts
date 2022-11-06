@@ -1,6 +1,6 @@
 import {ActionsTypes} from "./store";
+import {FormMessageDataType} from "../components/Dialogs/Dialogs";
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 
@@ -30,22 +30,15 @@ let initialState = {
             {id: 4, messages: 'Yo'},
             {id: 5, messages: 'Yo'},
         ] as Array<MessageType>,
-        newMessageBody: ''
     }
 
 export const dialogsReducer = (state= initialState, action:ActionsTypes) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return  {
-                ...state,
-                newMessageBody: action.body
-            }
         case SEND_MESSAGE:
-            let body = state.newMessageBody;
+            let body = action.newMessageBody.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
                 messages:[...state.messages, {id: 6, messages: body}]
             }
         default:
@@ -53,14 +46,9 @@ export const dialogsReducer = (state= initialState, action:ActionsTypes) => {
     }
 }
 
-export const updateNewMessageBodyCreator = (body: string) => {
+export const sendMessageCreator = (newMessageBody:FormMessageDataType) => {
     return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    } as const
-}
-export const sendMessageCreator = () => {
-    return {
-        type: SEND_MESSAGE
+        type: SEND_MESSAGE,
+        newMessageBody
     } as const
 }
