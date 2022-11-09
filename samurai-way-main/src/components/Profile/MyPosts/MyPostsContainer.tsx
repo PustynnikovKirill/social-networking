@@ -15,10 +15,9 @@ const mapStateToProps = (state:AppRootStateType) => {
 
 const mapDispatchToProps = (dispatch:any)=> {
     return {
-        addPost: (newPostText:string) => {
+        addPost:(newPostText:string) => {
             dispatch(addPostActionCreator(newPostText))
         }
-
     }
 }
 
