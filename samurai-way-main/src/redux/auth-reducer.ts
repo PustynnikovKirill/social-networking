@@ -1,5 +1,6 @@
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {stopSubmit} from "redux-form";
 
 export type InitialStateType = {
     id: number | null,
@@ -57,6 +58,9 @@ console.log(email)
 
                 // @ts-ignore
                 dispatch(getAuthUserData())
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0]: "Some error"
+                dispatch(stopSubmit('login',{_error: message}))
             }
         })
 }
