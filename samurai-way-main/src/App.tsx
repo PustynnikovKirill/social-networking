@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import {Nav} from "./components/Nav/Nav";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import {ActionsTypes} from "./redux/store";
 import {AppRootStateType, RootStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
@@ -10,41 +10,61 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {WithAuthRedirect} from "./hoc/withAuthRedirect";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {initializeApp} from "./redux/app-reducer";
+import {Preloader} from "./components/common/Preloader/Preloader";
 
-export type AppPropsType = {
-    state: AppRootStateType
-    dispatch: (action: ActionsTypes) => void
-    store: RootStoreType
+
+
+type MapDispatchToPropsType = {
+    initializeApp :()=>void
+}
+type MapStateToProps = {
+    initialized:boolean
 }
 
-export const App: React.FC<AppPropsType> = (props) => {
+class App extends React.Component<MapStateToProps & MapDispatchToPropsType> {
 
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
-    return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <HeaderContainer/>
-                <Nav/>
-                <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => (
-                        <WithAuthRedirect>
-                            <DialogsContainer/>
-                        </WithAuthRedirect>
-                    )}/>
-                    <Route path='/profile/:userId?' render={() =>
-                        <WithAuthRedirect>
-                            <ProfileContainer/>
-                        </WithAuthRedirect>}/>
+    render() {
+        if (!this.props.initialized){
+            return  <Preloader/>
+        }
 
-                    <Route path='/users' render={() =>
-                        <WithAuthRedirect>
-                            <UsersContainer/>
-                        </WithAuthRedirect>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+        return (
+            <BrowserRouter>
+                <div className='app-wrapper'>
+                    <HeaderContainer/>
+                    <Nav/>
+                    <div className='app-wrapper-content'>
+                        <Route path='/dialogs' render={() => (
+                            <WithAuthRedirect>
+                                <DialogsContainer/>
+                            </WithAuthRedirect>
+                        )}/>
+                        <Route path='/profile/:userId?' render={() =>
+                            <WithAuthRedirect>
+                                <ProfileContainer/>
+                            </WithAuthRedirect>}/>
+
+                        <Route path='/users' render={() =>
+                            <WithAuthRedirect>
+                                <UsersContainer/>
+                            </WithAuthRedirect>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
-    );
+            </BrowserRouter>
+        );
+    }
 }
 
+const mapStateToProps = (state:AppRootStateType) => {
+    return {initialized:state.app.initialized}
+}
+export default compose<React.FC>(withRouter, connect(mapStateToProps,{initializeApp}))(App)
 
