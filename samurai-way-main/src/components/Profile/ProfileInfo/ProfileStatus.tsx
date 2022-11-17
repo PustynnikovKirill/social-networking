@@ -34,7 +34,6 @@ export class ProfileStatus extends React.Component<ProfilePropsType, any>  {
                status:this.props.status
            })
        }
-
     }
 
     render () {
