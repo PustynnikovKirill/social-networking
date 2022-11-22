@@ -4,6 +4,7 @@ import {addPostActionCreator} from "../../../redux/profile.reducer";
 import {AppRootStateType,} from "../../../redux/redux-store";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
 
 const mapStateToProps = (state:AppRootStateType) => {
@@ -21,4 +22,5 @@ const mapDispatchToProps = (dispatch:any)=> {
     }
 }
 
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+export const MyPostsContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(MyPosts)

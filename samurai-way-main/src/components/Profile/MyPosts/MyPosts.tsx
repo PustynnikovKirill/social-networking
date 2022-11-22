@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import style from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
 import {} from "../../../index";
@@ -32,29 +32,33 @@ export const PostForm:React.FC<InjectedFormProps<PostProfileType>> = (props) => 
 const AddNewPostForm = reduxForm<PostProfileType>({form:"Profile"})(PostForm)
 
 
-export const MyPosts: FC<MyPostsType> = (props) => {
+export const MyPosts:React.FC<MyPostsType> = React.memo((props)=>  {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let onAddPost = (values:PostProfileType) => {
-        props.addPost(values.newPostText);
-        //props.dispatch(addPostActionCreator())
+// shouldComponentUpdate(nextProps: Readonly<MyPostsType>, nextState: Readonly<{}>): boolean {
+//     return nextProps !== this.props || nextState !== this.state
+// }
 
-    }
-    return (
-        <div className={style.postsBlock}>
-            <div>
-                <h3>My posts</h3>
-                <AddNewPostForm onSubmit = {onAddPost} />
+        let newPostElement = React.createRef<HTMLTextAreaElement>()
+        let onAddPost = (values:PostProfileType) => {
+            props.addPost(values.newPostText);
+            //props.dispatch(addPostActionCreator())
+
+        }
+        return (
+            <div className={style.postsBlock}>
+                <div>
+                    <h3>My posts</h3>
+                    <AddNewPostForm onSubmit = {onAddPost} />
+                </div>
+                <div className={style.post}>
+                    {props.postData.posts.map(el => {
+                        return (
+                            <Post id={el.id} message={el.messages} likes={el.likesCount}/>
+                        )
+                    })}
+                </div>
             </div>
-            <div className={style.post}>
-                {props.postData.posts.map(el => {
-                    return (
-                        <Post id={el.id} message={el.messages} likes={el.likesCount}/>
-                    )
-                })}
-            </div>
-        </div>
-    )
-}
+        )
+})
 
 

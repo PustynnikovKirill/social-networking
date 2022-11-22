@@ -10,6 +10,7 @@ type ProfilePropsType = {
 }
 
 export const Profile:React.FC<ProfilePropsType>  = (props) => {
+    // @ts-ignore
     return (
         <div>
             <ProfileInfo profile={props.profile} status = {props.status} updateStatus={props.updateStatus}/>
