@@ -50,6 +50,7 @@ export const MyPosts:React.FC<MyPostsType> = React.memo((props)=>  {
                     <h3>My posts</h3>
                     <AddNewPostForm onSubmit = {onAddPost} />
                 </div>
+
                 <div className={style.post}>
                     {props.postData.posts.map(el => {
                         return (

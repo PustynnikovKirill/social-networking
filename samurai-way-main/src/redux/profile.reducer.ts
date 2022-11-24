@@ -26,10 +26,9 @@ const initialState = {
     profile: null as null | ProfileType,
     newPostText: 'it-kamasutra.com',
     status:''
-
-
 }
-export type ActionsType = setUserProfile | addPostActionCreatorType | setStatusType
+
+export type ActionsType = setUserProfile | addPostActionCreatorType | setStatusType | deletePostType
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
@@ -56,6 +55,12 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
                 status: action.status
             }
         }
+        case "DELETE_POST": {
+            return {
+                ...state,posts:state.posts.filter(el=>el.id !== action.postId)
+            }
+        }
+
         default:
             return state
 
@@ -86,6 +91,14 @@ export const setStatus = (status:string) => {
         status
     }as const
 }
+export type deletePostType = ReturnType<typeof deletePost>
+export const deletePost = (postId:number) => {
+    return {
+        type: "DELETE_POST",
+        postId
+    } as const
+}
+
 
 export const getUserProfile = (userId:number) => (dispatch:Dispatch) => {
     usersAPI.getProfile(userId)
