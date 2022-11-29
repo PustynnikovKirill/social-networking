@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import {Nav} from "./components/Nav/Nav";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
-import {ActionsTypes} from "./redux/store";
 import {AppRootStateType, RootStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";

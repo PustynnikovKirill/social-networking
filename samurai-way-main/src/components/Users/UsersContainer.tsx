@@ -5,12 +5,10 @@ import {compose} from "redux";
 import {Users} from "./Users";
 import {
     follow, getUsersTC,
-    InitialStateType,
     setCurrentPage, toggleFollowingProgress, unfollow,
     UserType
 } from "../../redux/users.reducer";
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 import {
     getCurrentPage, getFollowingInProgress,
     getIsFetching,
