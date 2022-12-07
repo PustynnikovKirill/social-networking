@@ -15,7 +15,7 @@ let reducer = combineReducers({
     usersPages: usersReducer,
     auth:authReducer,
     app:appReducer,
-    form:formReducer
+    form:formReducer,
 })
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(reducer, composeEnhancers(

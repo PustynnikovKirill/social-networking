@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Nav} from "./components/Nav/Nav";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
-import {AppRootStateType, RootStoreType} from "./redux/redux-store";
+import {AppRootStateType, RootStoreType, store} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -10,17 +10,15 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {WithAuthRedirect} from "./hoc/withAuthRedirect";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
-
-
 type MapDispatchToPropsType = {
-    initializeApp :()=>void
+    initializeApp: () => void
 }
 type MapStateToProps = {
-    initialized:boolean
+    initialized: boolean
 }
 
 class App extends React.Component<MapStateToProps & MapDispatchToPropsType> {
@@ -30,8 +28,8 @@ class App extends React.Component<MapStateToProps & MapDispatchToPropsType> {
     }
 
     render() {
-        if (!this.props.initialized){
-            return  <Preloader/>
+        if (!this.props.initialized) {
+            return <Preloader/>
         }
 
         return (
@@ -62,8 +60,17 @@ class App extends React.Component<MapStateToProps & MapDispatchToPropsType> {
     }
 }
 
-const mapStateToProps = (state:AppRootStateType) => {
-    return {initialized:state.app.initialized}
+const mapStateToProps = (state: AppRootStateType) => {
+    return {initialized: state.app.initialized}
 }
-export default compose<React.FC>(withRouter, connect(mapStateToProps,{initializeApp}))(App)
+let AppContainer = compose<React.FC>(withRouter, connect(mapStateToProps, {initializeApp}))(App)
 
+const SamuraiJSApp = (props: any) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default SamuraiJSApp;
