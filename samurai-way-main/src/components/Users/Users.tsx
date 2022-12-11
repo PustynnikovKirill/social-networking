@@ -1,11 +1,11 @@
-import React from "react";;
+import React from "react";
 import {UserType} from "../../redux/users.reducer";
 import {Paginator} from "../common/paginator/Paginator";
 import {User} from "./User";
 
 
 type UsersType = {
-    totalUsersCount: number,
+    totalItemsCount: number,
     pageSize: number,
     currentPage: number,
     onPageChange: (pageNumber: number) => void,
@@ -18,7 +18,7 @@ type UsersType = {
 }
 
 export let Users = (props: UsersType) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize)
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
@@ -27,7 +27,8 @@ export let Users = (props: UsersType) => {
     return <div>
         <div>
             <Paginator currentPage={props.currentPage} onPageChange={props.onPageChange}
-                       totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
+                       totalItemsCount={props.totalItemsCount} pageSize={props.pageSize}
+                       portionSize = {10}
             />
         </div>
         <div>
