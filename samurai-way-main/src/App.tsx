@@ -3,7 +3,6 @@ import './App.css';
 import {Nav} from "./components/Nav/Nav";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import {AppRootStateType, RootStoreType, store} from "./redux/redux-store";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -13,6 +12,16 @@ import {compose} from "redux";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
+// import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer')
+    .then(({DialogsContainer})=>{
+        return {
+            default: DialogsContainer
+        }
+    })
+);
 
 type MapDispatchToPropsType = {
     initializeApp: () => void
@@ -40,7 +49,9 @@ class App extends React.Component<MapStateToProps & MapDispatchToPropsType> {
                     <div className='app-wrapper-content'>
                         <Route path='/dialogs' render={() => (
                             <WithAuthRedirect>
-                                <DialogsContainer/>
+                                <React.Suspense fallback={<div>Loading...</div>}>
+                                    <DialogsContainer/>
+                                </React.Suspense>
                             </WithAuthRedirect>
                         )}/>
                         <Route path='/profile/:userId?' render={() =>
