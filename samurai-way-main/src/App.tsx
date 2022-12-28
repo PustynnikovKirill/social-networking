@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Nav} from "./components/Nav/Nav";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter,HashRouter, Route, withRouter} from "react-router-dom";
 import {AppRootStateType, RootStoreType, store} from "./redux/redux-store";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -77,11 +77,11 @@ const mapStateToProps = (state: AppRootStateType) => {
 let AppContainer = compose<React.FC>(withRouter, connect(mapStateToProps, {initializeApp}))(App)
 
 const SamuraiJSApp = (props: any) => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SamuraiJSApp;

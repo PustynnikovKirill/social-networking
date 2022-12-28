@@ -10,30 +10,30 @@ const state = {
     newPostText: 'it-kamasutra.com',
     status:''
 }
-
-it ('length of posts should be incremented', ()=>{
-    let action = addPostActionCreator('it-kamasutra')
-
-
-    let newState = profileReducer(state, action)
-
-    expect (newState.posts.length).toBe(3) ;
-})
-
-it ('message of new post should be correct', ()=>{
-    let action = addPostActionCreator('it-kamasutra')
-
-
-    let newState = profileReducer(state, action)
-
-    expect (newState.posts[2].messages).toBe('it-kamasutra') ;
-})
-
-it ('after deleting length of messages should be decrement', ()=>{
-    let action = deletePost(1)
-
-
-    let newState = profileReducer(state, action)
-
-    expect(newState.posts.length).toBe(1) ;
-})
+//
+// it ('length of posts should be incremented', ()=>{
+//     let action = addPostActionCreator('it-kamasutra')
+//
+//
+//     let newState = profileReducer(state, action)
+//
+//     expect (newState.posts.length).toBe(3) ;
+// })
+//
+// it ('message of new post should be correct', ()=>{
+//     let action = addPostActionCreator('it-kamasutra')
+//
+//
+//     let newState = profileReducer(state, action)
+//
+//     expect (newState.posts[2].messages).toBe('it-kamasutra') ;
+// })
+//
+// it ('after deleting length of messages should be decrement', ()=>{
+//     let action = deletePost(1)
+//
+//
+//     let newState = profileReducer(state, action)
+//
+//     expect(newState.posts.length).toBe(1) ;
+// })
