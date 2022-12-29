@@ -27,6 +27,13 @@ const initialState: initialStateType = {
         photos: {
             large: '',
             small: ''
+        },
+        contacts: {
+            facebook: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            github: '',
         }
     },
     newPostText: 'it-kamasutra.com',

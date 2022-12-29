@@ -35,18 +35,19 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 export type ProfileType = {
     aboutMe?: string;
-    contacts?: {
-        facebook: string;
-        vk: string;
-        twitter: string;
-        instagram: string;
-        github: string;
-    };
+    contacts: ContactsType;
     lookingForAJob?: boolean;
     lookingForAJobDescription?: string;
     fullName?: string;
     userId?: number;
     photos: PhotosType
+}
+export type ContactsType ={
+    facebook: string;
+    vk: string;
+    twitter: string;
+    instagram: string;
+    github: string;
 }
 
 class ProfileContainer extends React.Component<PropsType> {
