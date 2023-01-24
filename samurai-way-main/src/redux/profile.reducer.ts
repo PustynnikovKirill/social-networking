@@ -2,6 +2,7 @@ import {PostType} from "./store";
 import {PhotosType, ProfileType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {FormDataProfileType} from "../components/Profile/ProfileInfo/ProfileInfo";
 
 
 export type InitialStateType = typeof initialState
@@ -147,6 +148,13 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
 }
 export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
     const response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+
+}
+export const saveProfile = (profile: FormDataProfileType) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }

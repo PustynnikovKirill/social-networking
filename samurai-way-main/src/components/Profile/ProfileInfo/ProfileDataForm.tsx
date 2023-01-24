@@ -2,18 +2,34 @@ import React, {ComponentType, WeakValidationMap} from "react";
 import {ContactsType, ProfileType} from "../ProfileContainer";
 import {createField, Input, Textarea} from "../../common/Preloader/FormsControls/FormsControls";
 import {InjectedFormProps, reduxForm} from "redux-form";
+import {FormDataProfileType} from "./ProfileInfo";
+
 
 
 type ProfileDataFormType = {
     profile: ProfileType | null,
-}
 
- const ProfileDataForm: React.FC<ProfileDataFormType & InjectedFormProps<{}, ProfileDataFormType>> = ({profile}) => {
-    return <form>
+
+}
+export type ProfileFormType={
+    userId: string,
+    lookingForAJob: string,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: string,
+    github?: string,
+    vk?: string,
+    facebook?: string,
+    instagram?: string,
+    twitter?: string,
+    website?: string,
+    youtube?: string,
+    mainLink?: string,
+}
+ const ProfileDataForm: React.FC<ProfileDataFormType & InjectedFormProps<ProfileFormType, ProfileDataFormType>> = ({profile, handleSubmit}) => {
+    return <form onSubmit={handleSubmit}>
         <div>
-            <button onClick={() => {
-            }}>save
-            </button>
+            <button>save</button>
         </div>
         <div>
             <b>Full name</b>:{createField(
@@ -64,7 +80,7 @@ type ProfileDataFormType = {
 }
 
 
-const ProfileDataFormReduxForm = reduxForm<{}, ProfileDataFormType>({
+const ProfileDataFormReduxForm = reduxForm<ProfileFormType, ProfileDataFormType>({
     form: 'edit-profile'
 })(ProfileDataForm)
 

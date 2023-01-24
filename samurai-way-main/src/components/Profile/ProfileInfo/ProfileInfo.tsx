@@ -4,7 +4,7 @@ import {ContactsType, ProfileType} from "../ProfileContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png";
-import ProfileDataForm from "./ProfileDataForm";
+import ProfileDataForm, {ProfileFormType} from "./ProfileDataForm";
 
 type ProfileInfoType = {
     profile: ProfileType | null,
@@ -12,9 +12,26 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: any) => void
+    saveProfile:(formData: ProfileFormType)=>void
 }
 
-export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto, ...props}) => {
+export type FormDataProfileType = {
+    userId: string,
+    lookingForAJob: string,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: string,
+    github?: string,
+    vk?: string,
+    facebook?: string,
+    instagram?: string,
+    twitter?: string,
+    website?: string,
+    youtube?: string,
+    mainLink?: string,
+}
+
+export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto,saveProfile, ...props}) => {
 
     const [editMode, setEditMode] = useState(false)
 
@@ -27,6 +44,9 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto, ...props}) =>
             savePhoto(e.target.files[0])
         }
     }
+    const onSubmit = (formData: ProfileFormType) => {
+        saveProfile(formData)
+    }
     return (
         <div>
             {/*<div>*/}
@@ -38,7 +58,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto, ...props}) =>
                 {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
 
                 {editMode ?
-                    <ProfileDataForm profile={props.profile}/> :
+                    <ProfileDataForm profile={props.profile} onSubmit={onSubmit}/>:
                     <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>}
