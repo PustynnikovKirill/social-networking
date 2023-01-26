@@ -54,7 +54,7 @@ export const MyPosts:React.FC<MyPostsType> = React.memo((props)=>  {
                 <div className={style.post}>
                     {props.postData.posts.map(el => {
                         return (
-                            <Post id={el.id} message={el.messages} likes={el.likesCount}/>
+                            <Post key={el.id} id={el.id} message={el.messages} likes={el.likesCount}/>
                         )
                     })}
                 </div>

@@ -3,6 +3,9 @@ import {PhotosType, ProfileType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {FormDataProfileType} from "../components/Profile/ProfileInfo/ProfileInfo";
+import {AppDispatch} from "./redux-store";
+import {FormErrors, stopSubmit} from "redux-form";
+
 
 
 export type InitialStateType = typeof initialState
@@ -16,7 +19,7 @@ type initialStateType = {
     posts:Array<PostType>,
     profile: ProfileType,
     newPostText:string,
-    status: string
+    status: string,
 }
 
 const initialState: initialStateType = {
@@ -153,10 +156,16 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
     }
 
 }
-export const saveProfile = (profile: FormDataProfileType) => async (dispatch: Dispatch) => {
-    const response = await profileAPI.saveProfile(profile)
+export const saveProfile = (profile: FormDataProfileType) => async (dispatch: AppDispatch, getState:any) => {
+    const userId = getState().auth.id
+    let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos))
+        dispatch(getUserProfile(userId))
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+        // @ts-ignore
+        dispatch(stopSubmit('edit-profile', {_error: message}))
+        // dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
     }
 
 }
