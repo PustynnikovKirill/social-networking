@@ -12,8 +12,8 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: any) => void
-    saveProfile:(formData: ProfileFormType)=>void
-
+    saveProfile: (formData: ProfileFormType) => void,
+    profileUpdateStatus:boolean
 }
 
 export type FormDataProfileType = {
@@ -32,7 +32,7 @@ export type FormDataProfileType = {
     mainLink?: string,
 }
 
-export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto,saveProfile, ...props}) => {
+export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto, saveProfile, ...props}) => {
 
     const [editMode, setEditMode] = useState(false)
 
@@ -47,7 +47,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({savePhoto,saveProfile, .
     }
     const onSubmit = (formData: ProfileFormType) => {
         saveProfile(formData)
-        // setEditMode(false)
+        props.profileUpdateStatus && setEditMode(false)
     }
     return (
         <div>

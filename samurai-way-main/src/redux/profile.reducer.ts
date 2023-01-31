@@ -4,8 +4,7 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {FormDataProfileType} from "../components/Profile/ProfileInfo/ProfileInfo";
 import {AppDispatch} from "./redux-store";
-import {FormErrors, stopSubmit} from "redux-form";
-
+import {stopSubmit} from "redux-form";
 
 
 export type InitialStateType = typeof initialState
@@ -16,10 +15,11 @@ export type InitialStateType = typeof initialState
 //     likesCount:string,
 // }
 type initialStateType = {
-    posts:Array<PostType>,
+    posts: Array<PostType>,
     profile: ProfileType,
-    newPostText:string,
+    newPostText: string,
     status: string,
+    profileUpdateStatus: boolean
 }
 
 const initialState: initialStateType = {
@@ -41,8 +41,8 @@ const initialState: initialStateType = {
         }
     },
     newPostText: 'it-kamasutra.com',
-    status: ''
-
+    status: '',
+    profileUpdateStatus: false
 }
 
 export type ActionsType = setUserProfile
@@ -50,6 +50,7 @@ export type ActionsType = setUserProfile
     | setStatusType
     | deletePostType
     | savePhotoSuccessType
+    | profileUpdateStatusType
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
@@ -83,7 +84,12 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
         }
         case "SAVE_PHOTO_SUCCESS": {
             return {
-                ...state, profile: {...state.profile, photos:action.photos}
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
+        }
+        case "PROFILE_UPDATE_STATUS": {
+            return {
+                ...state, profileUpdateStatus:action.profileUpdateStatus
             }
         }
         default:
@@ -130,7 +136,13 @@ export const savePhotoSuccess = (photos: PhotosType) => {
         photos
     } as const
 }
-
+export type profileUpdateStatusType = ReturnType<typeof profileUpdateStatus>
+export const profileUpdateStatus = (profileUpdateStatus:boolean) => {
+    return {
+        type: "PROFILE_UPDATE_STATUS",
+        profileUpdateStatus
+    } as const
+}
 
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
     const response = await usersAPI.getProfile(userId)
@@ -156,15 +168,19 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
     }
 
 }
-export const saveProfile = (profile: FormDataProfileType) => async (dispatch: AppDispatch, getState:any) => {
+export const saveProfile = (profile: FormDataProfileType) => async (dispatch: AppDispatch, getState: any) => {
     const userId = getState().auth.id
     let response = await profileAPI.saveProfile(profile)
+
     if (response.data.resultCode === 0) {
         dispatch(getUserProfile(userId))
+        dispatch(profileUpdateStatus(true))
     } else {
         let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
         // @ts-ignore
         dispatch(stopSubmit('edit-profile', {_error: message}))
+        dispatch(profileUpdateStatus(false))
+        // return Promise.reject(response.data.messages[0])
         // dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
     }
 

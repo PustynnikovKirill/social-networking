@@ -9,7 +9,8 @@ type ProfilePropsType = {
     updateStatus: (status:string)=>void,
     isOwner:boolean,
     savePhoto:(file:any)=>void,
-    saveProfile:(formData: FormDataProfileType)=>void
+    saveProfile:(formData: FormDataProfileType)=>void,
+    profileUpdateStatus:boolean
 }
 
 export const Profile:React.FC<ProfilePropsType>  = (props) => {
@@ -22,6 +23,7 @@ export const Profile:React.FC<ProfilePropsType>  = (props) => {
                          isOwner={props.isOwner}
                          savePhoto={props.savePhoto}
                          saveProfile ={props.saveProfile}
+                         profileUpdateStatus={props.profileUpdateStatus}
             />
             <MyPostsContainer/>
         </div>
